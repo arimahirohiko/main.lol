@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>arimahirohiko</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    @font-face {
+      font-family: 'Oswald';
+      src: url('Oswald-VariableFont_wght.ttf') format('truetype');
+      font-style: normal;
+      font-weight: 200 700; /* 可変フォント範囲 */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #cacaca;
+    }
+
+    .container {
+      font-family: 'Oswald', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 40px;
+    }
+
+    .left {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .left img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+    }
+
+    .right {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .title {
+      font-size: 64px;
+      font-weight: 600; /* 可変ウェイト指定 */
+      letter-spacing: 4px;
+      }
+
+      .box {
+        margin: 48px auto 0 auto;
+        padding: 24px 32px;
+        width: 60%;
+        border: 2px solid #111;
+        border-radius: 16px;
+        background: none;
+        font-size: 20px;
+        color: #111;
+        font-family: 'Oswald', sans-serif;
+        transition: box-shadow 0.2s;
+      }
+      .box a {
+        color: #111;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .box:hover {
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      }
+
+      .works-area {
+        margin: 48px auto 0 auto;
+        padding: 24px 0 32px 0;
+        border: 2px solid #111;
+        border-radius: 18px;
+        width: 60%;
+        background: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+      }
+      .works-title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 18px;
+        letter-spacing: 2px;
+        color: #222;
+        font-family: 'Oswald', sans-serif;
+      }
+      .works-img-box {
+        width: 60%;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1.5px solid #222;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .works-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      footer {
+        margin-top: 60px;
+        padding: 24px 0 16px 0;
+        text-align: center;
+        color: #444;
+        font-size: 16px;
+        letter-spacing: 1px;
+        background: none;
+        font-family: 'Oswald', sans-serif;
+        border-top: 1.5px solid #aaa;
+      }
+
+      @media (max-width: 768px) {
+        .works-area {
+          width: 95vw;
+          min-width: 0;
+        }
+        .works-img-box {
+          width: 80vw;
+          height: 38vw;
+          min-width: 0;
+          min-height: 0;
+        }
+        .box{
+        width: 95vw;
+          min-width: 0;
+        }
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .left, .right {
+        width: 100%;
+      }
+
+      .right {
+        margin-top: 30px;
+      }
+
+      .title {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="left">
+      <img src="design.jpg" alt="Design Image">
+    </div>
+
+    <div class="right">
+      <div class="title">
+        ARIMA HIROHIKO
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    
+
+    <!-- URLボックス -->
+    <div class="box">
+      <p style="font-size: 20px; margin-top: 20px;">
+      有馬博彦のポートフォリオへようこそ。<br>
+      有馬博彦はYoutuberです。
+      </p><br>
+      <p>--SNS--</p>
+      <a href="https://www.youtube.com/watch?v=DkqPHUG4tRI" target="_blank">•Youtube</a><br>
+      <a href="https://www.instagram.com/arima.hironobu123/" target="_blank">•Instagram</a>
+     <br><br>
+    </div>
+    <div class="box">
+    <p>--App--</p>
+    <a href="https://arimahirohiko.github.io/Ankicard_app/" target="_blank">•暗記カードPDF生成</a><br>
+
+
+    </div>
+    <!-- 作品エリア（ランダム画像表示） -->
+    <div class="works-area">
+      <div class="works-title">MY WORKS</div>
+      <div class="works-img-box">
+        <img id="randomWorkImg" src="imgs/sample.jpg" alt="作品画像" />
+      </div>
+    </div>
+  </div>
+  <footer>
+    &copy; 2026 ARIMA HIROHIKO Portfolio.
+  </footer>
+  <script>
+    // 作品画像ランダム表示
+    const workImages = [
+      'imgs/1.PNG',
+      'imgs/2.PNG',
+      'imgs/3.PNG',
+      'imgs/4.PNG',
+      'imgs/5.jpg',
+    ];
+    function showRandomWorkImg() {
+      if(workImages.length === 0) return;
+      const idx = Math.floor(Math.random() * workImages.length);
+      document.getElementById('randomWorkImg').src = workImages[idx];
+    }
+    showRandomWorkImg();
+  </script>
+</body>
+</html>
