@@ -4,13 +4,19 @@
   <meta charset="UTF-8">
   <title>arimahirohiko</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <style>
     @font-face {
       font-family: 'Oswald';
       src: url('Oswald-VariableFont_wght.ttf') format('truetype');
       font-style: normal;
-      font-weight: 200 700; /* 可変フォント範囲 */
+      font-weight: 200 700;
+    }
+
+    :root {
+      --mustard: #ffffff;
+      --ink: #111111;
+      --paper: #dddad1;
+      --line: rgba(17, 17, 17, 0.28);
     }
 
     * {
@@ -20,206 +26,464 @@
     }
 
     body {
-      background-color: #cacaca;
-    }
-
-    .container {
       font-family: 'Oswald', sans-serif;
-      display: flex;
+      color: var(--ink);
+      background: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .site {
+      width: min(1320px, 94vw);
+      margin: 0 auto;
+      padding: 20px 0 36px;
+    }
+
+    .topline,
+    .bottomline {
+      display: grid;
+      grid-template-columns: 24px 1fr 24px 1fr 24px;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      padding: 40px;
+      gap: 18px;
+      font-size: clamp(12px, 1.3vw, 19px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
     }
 
-    .left {
-      width: 50%;
+    .dot {
+      width: 24px;
+      height: 24px;
+      background: var(--ink);
+      border-radius: 2px;
+    }
+
+    .topline {
+      margin-bottom: 24px;
+    }
+
+    .frame {
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--mustard) 84%, #f8f2dc 16%);
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      min-height: 56vh;
+      border-bottom: 2px solid var(--ink);
+
+    }
+
+    .hero-left {
+      padding: clamp(18px, 2.4vw, 36px);
+      border-right: 2px solid var(--ink);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 20px;
+    }
+
+    .meta {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: clamp(12px, 1vw, 16px);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    .left img {
+    .headline {
+      line-height: 0.9;
+      letter-spacing: 0.01em;
+    }
+
+    .headline .small {
+      display: block;
+      font-size: clamp(20px, 3vw, 44px);
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .headline .big {
+      display: block;
+      font-size: clamp(58px, 9.5vw, 136px);
+      font-weight: 620;
+      text-transform: uppercase;
+    }
+
+    .tag {
+      display: inline-block;
+      border: 2px solid var(--ink);
+      padding: 10px 14px;
+      font-size: clamp(14px, 1.45vw, 22px);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      /* background: var(--paper); */
+    }
+
+    .hero-right {
+      padding: clamp(16px, 2vw, 28px);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 14px;
+      /* background: var(--ink); */
+      color: var(--paper);
+    }
+
+    .serial {
+      font-size: clamp(24px, 3.4vw, 56px);
+      letter-spacing: 0.05em;
+      text-align: right;
+      line-height: 0.9;
+    }
+
+    .hero-image {
+      border: 1.5px solid rgba(244, 241, 233, 0.5);
+      /* border-radius: 12px; */
+      overflow: hidden;
+      min-height: 300px;
+      background:
+        /* radial-gradient(circle at 50% 48%, rgba(228, 179, 33, 0.14) 0 42%, transparent 60%), */
+        #ffffff;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+    }
+
+    .hero-image img {
       width: 100%;
-      max-width: 600px;
-      height: auto;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: contrast(1.06);
+      max-height: 65vh;
     }
 
-    .right {
-      width: 50%;
+    .blurb {
+      border-top: 1px solid rgba(244, 241, 233, 0.45);
+      padding-top: 10px;
+      font-size: clamp(14px, 1.2vw, 18px);
+      letter-spacing: 0.05em;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .gridline {
+      border-bottom: 2px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      text-align: center;
+      min-height: 74px;
+      font-size: clamp(28px, 4vw, 52px);
+      letter-spacing: 0.1em;
+    }
+
+    .panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cell {
+      padding: clamp(16px, 2vw, 30px);
+      border-right: 2px solid var(--ink);
+      /* border-bottom: 2px solid var(--ink); */
+    }
+
+    .cell:nth-child(2n) {
+      border-right: none;
+    }
+
+    .cell h2 {
+      font-size: clamp(22px, 3vw, 42px);
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .cell p {
+      font-size: clamp(16px, 1.45vw, 22px);
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      margin-top: 10px;
+    }
+
+    .links a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1.5px solid var(--ink);
+      padding: 6px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: clamp(13px, 1.1vw, 17px);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .links a:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .app-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .app-item {
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      padding: 10px 12px;
+      /* background: rgba(255, 255, 255, 0.16); */
+    }
+
+    .app-head {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 6px;
     }
 
-    .title {
-      font-size: 64px;
-      font-weight: 600; /* 可変ウェイト指定 */
-      letter-spacing: 4px;
+    .app-name {
+      font-size: clamp(17px, 1.7vw, 24px);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .app-desc {
+      font-size: clamp(13px, 1.1vw, 16px);
+      line-height: 1.4;
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .app-link {
+      display: inline-block;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1.5px solid var(--ink);
+      padding: 4px 9px;
+      font-size: clamp(12px, 1vw, 15px);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .app-link:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .works {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .works-label {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: 0.9;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .works-img-box {
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .works-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: clamp(11px, 1.1vw, 15px);
+    }
+
+    @media (max-width: 980px) {
+      .topline,
+      .bottomline {
+        grid-template-columns: 16px 1fr 16px;
       }
 
-      .box {
-        margin: 48px auto 0 auto;
-        padding: 24px 24px;
-        width: 60%;
-        border: 2px solid #111;
-        border-radius: 10px;
-        background: none;
-        font-size: 20px;
-        color: #111;
-        font-family: 'Oswald', sans-serif;
-        transition: box-shadow 0.2s;
-      }
-      .box a {
-        color: #111;
-        text-decoration: none;
-        font-weight: 500;
-      }
-      .box:hover {
-        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      .topline span:nth-child(4),
+      .topline .dot:last-child,
+      .bottomline span:nth-child(4),
+      .bottomline .dot:last-child {
+        display: none;
       }
 
-      .works-area {
-        margin: 48px auto 0 auto;
-        padding: 24px 0 32px 0;
-        border: 2px solid #111;
-        border-radius: 18px;
-        width: 60%;
-        background: none;
-        display: flex;
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left {
+        border-right: none;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      .hero-image {
+        min-height: 230px;
+      }
+
+      .panel {
+        grid-template-columns: 1fr;
+      }
+
+      .cell {
+        border-right: none;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      .cell:last-child {
+        border-bottom: none;
+      }
+
+      .works {
+        grid-template-columns: 1fr;
+      }
+
+      .works-label {
+        writing-mode: horizontal-tb;
+      }
+
+      .footer {
         flex-direction: column;
-        align-items: center;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.03);
-      }
-      .works-title {
-        font-size: 28px;
-        font-weight: 600;
-        margin-bottom: 18px;
-        letter-spacing: 2px;
-        color: #222;
-        font-family: 'Oswald', sans-serif;
-      }
-      .works-img-box {
-        width: 60%;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1.5px solid #222;
-        background: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .works-img-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 10px;
-      }
-
-      footer {
-        margin-top: 60px;
-        padding: 24px 0 16px 0;
-        text-align: center;
-        color: #444;
-        font-size: 16px;
-        letter-spacing: 1px;
-        background: none;
-        font-family: 'Oswald', sans-serif;
-        border-top: 1.5px solid #aaa;
-      }
-
-      @media (max-width: 768px) {
-        .works-area {
-          width: 95vw;
-          min-width: 0;
-        }
-        .works-img-box {
-          width: 80vw;
-          height: 38vw;
-          min-width: 0;
-          min-height: 0;
-        }
-        .box{
-        width: 95vw;
-          min-width: 0;
-        }
-      .container {
-        flex-direction: column;
-        height: auto;
-      }
-
-      .left, .right {
-        width: 100%;
-      }
-
-      .right {
-        margin-top: 30px;
-      }
-
-      .title {
-        font-size: 40px;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="left">
-      <img src="design.jpg" alt="Design Image">
+  <main class="site">
+    <div class="topline">
+      <div class="dot"></div>
+      <span>Arima Hirohiko / Visual Archive</span>
+      <!-- <div class="dot"></div>
+      <span>Prototype Class: Organic-01</span> -->
+      <!-- <div class="dot"></div> -->
     </div>
 
-    <div class="right">
-      <div class="title">
-        ARIMA HIROHIKO
+    <section class="frame">
+      <div class="hero">
+        <div class="hero-left">
+          <div class="meta">
+            <!-- <span>Experimental Systems</span> -->
+          </div>
+
+          <div class="headline">
+            <!-- <span class="small">Text Labs</span> -->
+            <span class="big">ARIMA</span>
+            <span class="big">HIROHIKO</span>
+          </div>
+          <div class="tag">アプリ開発/イラスト</div>
+        </div>
+
+        <div class="hero-right">
+          <!-- <div class="serial">OP-01</div> -->
+          <div class="hero-image">
+            <img src="main.PNG" alt="Arima Artwork Main Visual" width="600" height="400" />
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="main">
-    
 
-    <!-- URLボックス -->
-    <div class="box">
-      <p style="font-size: 20px; margin-top: 20px;">
-      有馬博彦のポートフォリオへようこそ。<br>
-      有馬博彦はYoutuberです。
-      </p><br>
-      <p>--SNS--</p>
-      <a href="https://www.youtube.com/watch?v=DkqPHUG4tRI" target="_blank">•Youtube</a><br>
-      <a href="https://www.instagram.com/arima.hironobu123/" target="_blank">•Instagram</a>
-     <br><br>
-    </div>
-    <div class="box">
-    <p>--App--</p>
-    <a href="https://arimahirohiko.github.io/Ankicard_app/" target="_blank">•暗記カードPDF生成</a><br>
+      <!-- <div class="gridline">
+        <span>+</span><span>R</span><span>+</span><span>/</span><span>+</span>
+      </div> -->
 
+      <div class="panel">
+        <article class="cell">
+          <h2>Profile</h2>
+          <p>有馬博彦のポートフォリオへようこそ。作品、動画、アプリをこの場所に集約しています。</p>
+          <div class="links">
+            <a href="https://www.youtube.com/watch?v=DkqPHUG4tRI" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://www.instagram.com/arima.hironobu123/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </article>
 
-    </div>
-    <!-- 作品エリア（ランダム画像表示） -->
-    <div class="works-area">
-      <div class="works-title">MY WORKS</div>
-      <div class="works-img-box">
-        <img id="randomWorkImg" src="imgs/sample.jpg" alt="作品画像" />
+        <!-- <article class="cell">
+          <h2>My Works</h2>
+          <div class="works">
+            <div class="works-label">My Works</div>
+            <div class="works-img-box">
+              <img id="randomWorkImg" src="imgs/1.jpg" alt="作品画像" />
+            </div>
+          </div>
+        </article> -->
+
+        <article class="cell">
+          <h2>App</h2>
+          <p>公開中のアプリです。</p>
+          <ul class="app-list">
+            <li class="app-item">
+              <div class="app-head">
+                <h3 class="app-name">TaskAlien</h3>
+                <a class="app-link" href="https://apps.apple.com/jp/app/taskalien/id6764772453" target="_blank" rel="noopener noreferrer">App Store</a>
+              </div>
+              <p class="app-desc">ポモドーロタイマー・Todo・日記をまとめた、タスク効率化アプリ。</p>
+            </li>
+            <li class="app-item">
+              <div class="app-head">
+                <h3 class="app-name">針向</h3>
+                <a class="app-link" href="https://apps.apple.com/jp/app/%E9%87%9D%E5%90%91/id6766467779" target="_blank" rel="noopener noreferrer">App Store</a>
+              </div>
+              <p class="app-desc">目的地の方向だけをシンプルに示す、最小限ナビゲーションアプリ。</p>
+            </li>
+            <!-- 追加テンプレ:
+            <li class="app-item">
+              <div class="app-head">
+                <h3 class="app-name">アプリ名</h3>
+                <a class="app-link" href="https://example.com" target="_blank" rel="noopener noreferrer">App Store</a>
+              </div>
+              <p class="app-desc">1行の短い説明。</p>
+            </li>
+            -->
+          </ul>
+        </article>
+<!-- 
+        <article class="cell">
+          <h2>System Log</h2>
+          <p>Archive Ref: ARM-2026</p>
+          <p>Mode: Active Monitoring</p>
+          <p>Version: V.01</p>
+        </article> -->
       </div>
+    </section>
+
+    <div class="footer">
+      <span>&copy; 2026 ARIMA HIROHIKO Portfolio.</span>
     </div>
-  </div>
-  <footer>
-    &copy; 2026 ARIMA HIROHIKO Portfolio.
-  </footer>
-  <script>
-    // 作品画像ランダム表示
-    const workImages = [
-      'imgs/1.PNG',
-      'imgs/2.PNG',
-      'imgs/3.PNG',
-      'imgs/4.PNG',
-      'imgs/5.jpg',
-    ];
-    function showRandomWorkImg() {
-      if(workImages.length === 0) return;
-      const idx = Math.floor(Math.random() * workImages.length);
-      document.getElementById('randomWorkImg').src = workImages[idx];
-    }
-    showRandomWorkImg();
-  </script>
+  </main>
+
 </body>
 </html>
